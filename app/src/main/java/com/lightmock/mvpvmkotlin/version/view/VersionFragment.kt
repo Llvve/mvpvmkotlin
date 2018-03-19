@@ -16,7 +16,9 @@ import com.lightmock.mvpvmkotlin.version.presenter.VersionPresenter
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel
 import kotlinx.android.synthetic.main.fragment_version.*
 
-
+/**
+ * Created by Llvve on 16/11/2017 AD.
+ */
 class VersionFragment: Fragment(), IVersion.IView {
 
     private var binding: FragmentVersionBinding? = null
@@ -48,7 +50,7 @@ class VersionFragment: Fragment(), IVersion.IView {
             // represent it!! by version
             // tv_result.text = "Version ".plus(it!!.device_name)
             binding!!.data = version
-            tv_device.text = "Observe Device ".plus(version!!.device_name) })
+            tv_device.text = "Observe Device : ".plus(version!!.device_name) })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

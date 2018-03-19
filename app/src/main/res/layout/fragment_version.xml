@@ -40,19 +40,27 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_binding"
+                android:id="@+id/tv_binding_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{`Binding Version ` + viewModel.version.version}"
+                android:text="@{`Binding Version : ` + viewModel.version.version}"
                 tools:text="Version Binding"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/tv_binding_force_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{`Binding Force update : ` + viewModel.version.is_force_update}"
+                tools:text="Force update Binding"
                 android:textColor="@android:color/white"/>
 
             <TextView
                 android:id="@+id/tv_appname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{`Binding App name ` + data.app_name}"
-                tools:text="Device"
+                android:text="@{`Binding App name : ` + data.app_name}"
+                tools:text="App name"
                 android:textColor="@android:color/white"/>
 
             <TextView
