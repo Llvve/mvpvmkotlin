@@ -1,4 +1,4 @@
-package com.lightmock.mvpvmkotlin.version.view
+package com.lightmock.mvpvmkotlin.version.itf
 
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel
 
@@ -9,11 +9,6 @@ interface IVersion {
          * Update progress to TextView
          */
         fun updateProgress(progress: String)
-
-        /**
-         * Provides on click reload button
-         */
-        fun onReloadClick()
 
         /**
          * Provides handle bind case
@@ -32,7 +27,7 @@ interface IVersion {
         fun onViewInit()
 
         /**
-         * Provides initiate of view
+         * Provides onReload app
          */
         fun onReload(appType: Int, deviceType: Int)
     }

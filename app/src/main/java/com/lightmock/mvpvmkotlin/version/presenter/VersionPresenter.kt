@@ -1,8 +1,8 @@
 package com.lightmock.mvpvmkotlin.version.presenter
 
 import com.lightmock.mvpvmkotlin.version.data.Version
+import com.lightmock.mvpvmkotlin.version.itf.IVersion
 import com.lightmock.mvpvmkotlin.version.networking.VersionApi
-import com.lightmock.mvpvmkotlin.version.view.IVersion
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel
 import kotlin.properties.Delegates
 
@@ -25,7 +25,8 @@ class VersionPresenter(iView: IVersion.IView, viewModel: VersionViewModel): Vers
     }
 
     override fun onBinding(version: Version, message: String?, status: Int?) {
-        iView.updateProgress("Retrieve last version complete")
+        versionCache.add(version)
+        iView.updateProgress("Complete retrieve last version")
         viewModel.setVersion(version)
         iView.onBind(viewModel)
     }

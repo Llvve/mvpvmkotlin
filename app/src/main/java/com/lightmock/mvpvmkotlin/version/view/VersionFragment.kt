@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.lightmock.core.binder.toast
 import com.lightmock.mvpvmkotlin.R
 import com.lightmock.mvpvmkotlin.databinding.FragmentVersionBinding
+import com.lightmock.mvpvmkotlin.version.itf.IVersion
 import com.lightmock.mvpvmkotlin.version.presenter.VersionPresenter
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel
 import kotlinx.android.synthetic.main.fragment_version.*
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_version.*
 /**
  * Created by Llvve on 16/11/2017 AD.
  */
-class VersionFragment: Fragment(), IVersion.IView {
+class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
 
     private var binding: FragmentVersionBinding? = null
     private lateinit var viewModel: VersionViewModel
@@ -60,6 +61,14 @@ class VersionFragment: Fragment(), IVersion.IView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /**
+         * Initiate api connection and action listener
+         */
+        btn_reload.setOnClickListener(this)
+        rad_device_android.setOnClickListener(this)
+        rad_device_ios.setOnClickListener(this)
+
         presenter.onViewInit()
     }
 
@@ -68,12 +77,28 @@ class VersionFragment: Fragment(), IVersion.IView {
     }
 
     /**
-     * Emits items when the user clicks the reload button
+     * Emits when the user clicks the varies action
      */
-    override fun onReloadClick() {
-
+    override fun onClick(view: View?) {
+        when (view!!.id) {
+            btn_reload.id -> {
+                presenter.onReload(1, 1)
+            }
+            rad_device_android.id -> {
+                presenter.onReload(1, 2)
+            }
+            rad_device_ios.id -> {
+                presenter.onReload(1, 1)
+            }
+            else -> {
+                // TODO handle more case
+            }
+        }
     }
 
+    /**
+     * Emits when viewmodel already bind
+     */
     override fun onBind(viewModel: VersionViewModel) {
         binding!!.viewModel = viewModel
     }
