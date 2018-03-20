@@ -32,16 +32,22 @@ class VersionPresenter(iView: IVersion.IView, viewModel: VersionViewModel): Vers
     }
 
     override fun onFailureBinding(message: String, status: Int) {
+        iView.updateProgress(message)
         iView.onFailureBinding(message, status)
     }
 
     override fun onViewInit() {
         iView.updateProgress("Retrieving last version")
-        getLastVersion(1,  2) // 1 = user, 2 = android
+        getLastVersion(viewModel.getAppType(), viewModel.getDeviceType())
     }
 
-    override fun onReload(appType: Int, deviceType: Int) {
+    override fun onReload() {
         iView.updateProgress("Reload last version")
-        getLastVersion(appType,  deviceType) // 1 = user, 2 = android
+        getLastVersion(viewModel.getAppType(), viewModel.getDeviceType())
+    }
+
+    override fun onDeviceSwitched(appType: Int, deviceType: Int) {
+        viewModel.setAppType(appType)
+        viewModel.setDeviceType(deviceType)
     }
 }

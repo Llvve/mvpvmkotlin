@@ -82,13 +82,13 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
     override fun onClick(view: View?) {
         when (view!!.id) {
             btn_reload.id -> {
-                presenter.onReload(1, 1)
+                presenter.onReload()
             }
             rad_device_android.id -> {
-                presenter.onReload(1, 2)
+                presenter.onDeviceSwitched(VersionViewModel.AppType.HANDIGO.value, VersionViewModel.Device.ANDROID.value)
             }
             rad_device_ios.id -> {
-                presenter.onReload(1, 1)
+                presenter.onDeviceSwitched(VersionViewModel.AppType.HANDIGO.value, VersionViewModel.Device.IOS.value)
             }
             else -> {
                 // TODO handle more case

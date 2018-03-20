@@ -27,8 +27,13 @@ interface IVersion {
         fun onViewInit()
 
         /**
-         * Provides onReload app
+         * Provides onReload button
          */
-        fun onReload(appType: Int, deviceType: Int)
+        fun onReload()
+
+        /**
+         * Provides onReload button
+         */
+        fun onDeviceSwitched(appType: Int, deviceType: Int)
     }
 }
