@@ -42,7 +42,20 @@ interface VersionApi: ApiInterface<ApiResponse<Version>>, Callback<ApiResponse<V
         if (response!!.isSuccessful && response.body() != null && response.code() == 200) {
 
             val resp = (response.body() as ApiResponse<Version>)
-            onBinding(resp.data, resp.message, resp.status)
+
+            if (resp.Status != 200) {
+                onFailureBinding(resp.Message!!, resp.Status)
+                return
+            }
+
+            try {
+                onBinding(resp.data, resp.Message, resp.Status)
+            }
+            catch (e : Exception) {
+                onFailureBinding(e.message!!, 500)
+                e.printStackTrace()
+            }
+
             return
         }
 
