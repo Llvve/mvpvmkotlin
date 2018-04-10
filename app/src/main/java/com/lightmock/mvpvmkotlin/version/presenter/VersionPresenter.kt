@@ -28,6 +28,7 @@ class VersionPresenter(iView: IVersion.IView, viewModel: VersionViewModel): Vers
         versionCache.add(version)
         iView.updateProgress("Complete retrieve last version")
         viewModel.setVersion(version)
+
         iView.onBind(viewModel)
     }
 

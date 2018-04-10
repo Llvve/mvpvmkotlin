@@ -46,9 +46,10 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
         viewModel.getVersion().observe(this, Observer { version ->
             /**
              * Handle observe version data
+             * Shows how to manually set text
              */
 
-            // represent it!! by version
+            // represent it!! for version
             // tv_result.text = "Version ".plus(it!!.device_name)
             binding!!.data = version
             tv_device.text = "Observe Device : ".plus(version!!.device_name) })
@@ -97,7 +98,7 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
     }
 
     /**
-     * Emits when viewmodel already bind
+     * Emits when viewmodel bind already
      */
     override fun onBind(viewModel: VersionViewModel) {
         binding!!.viewModel = viewModel

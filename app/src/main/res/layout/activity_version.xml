@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel" />
+
+        <variable
+            name="data"
+            type="com.lightmock.mvpvmkotlin.version.data.Version" />
     </data>
 
     <LinearLayout
@@ -18,10 +22,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="@{`VersionActivity device selected : ` + viewModel.version.device_type}"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@{`VersionActivity device selected : ` + data.device_name}"
             tools:text="VersionActivity"
             app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_title_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:text="Device : " />
 
         <fragment
             android:id="@+id/version_fragment"
