@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_version.*
  */
 class VersionActivity : AppCompatActivity() {
 
-    private var binding: ActivityVersionBinding? = null
+    private lateinit var binding: ActivityVersionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class VersionActivity : AppCompatActivity() {
              * Shows binding data from versionFragment to ActivityBinding
              * Shows how to manually set text
              */
-            binding!!.data = version
+            binding.data = version
             tv_title_device.text = "Title Device : ".plus(version!!.device_name)
         })
     }

@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.lightmock.core.binder.toast
 import com.lightmock.mvpvmkotlin.R
 import com.lightmock.mvpvmkotlin.databinding.FragmentVersionBinding
+import com.lightmock.mvpvmkotlin.teltype.TelTypeActivity
 import com.lightmock.mvpvmkotlin.version.itf.IVersion
 import com.lightmock.mvpvmkotlin.version.presenter.VersionPresenter
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_version.*
  */
 class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
 
-    private var binding: FragmentVersionBinding? = null
+    private lateinit var binding: FragmentVersionBinding
     private lateinit var viewModel: VersionViewModel
     private lateinit var presenter: VersionPresenter
 
@@ -51,13 +52,13 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
 
             // represent it!! for version
             // tv_result.text = "Version ".plus(it!!.device_name)
-            binding!!.data = version
+            binding.data = version
             tv_device.text = "Observe Device : ".plus(version!!.device_name) })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_version, container, false)
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,6 +68,7 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
          * Initiate api connection and action listener
          */
         btn_reload.setOnClickListener(this)
+        btn_goto_teltype.setOnClickListener(this)
         rad_device_android.setOnClickListener(this)
         rad_device_ios.setOnClickListener(this)
 
@@ -84,6 +86,9 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
         when (view!!.id) {
             btn_reload.id -> {
                 presenter.onReload()
+            }
+            btn_goto_teltype.id -> {
+                startActivity(TelTypeActivity.newIntent(context!!, binding.data!!))
             }
             rad_device_android.id -> {
                 presenter.onDeviceSwitched(VersionViewModel.AppType.HANDIGO.value, VersionViewModel.Device.ANDROID.value)

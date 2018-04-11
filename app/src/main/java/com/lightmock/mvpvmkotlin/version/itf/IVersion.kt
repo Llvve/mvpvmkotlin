@@ -14,6 +14,7 @@ interface IVersion {
          * Provides handle bind case
          */
         fun onBind(viewModel: VersionViewModel)
+
         /**
          * Provides handle failure binding case
          */
@@ -32,7 +33,7 @@ interface IVersion {
         fun onReload()
 
         /**
-         * Provides onReload button
+         * Provides switched button
          */
         fun onDeviceSwitched(appType: Int, deviceType: Int)
     }

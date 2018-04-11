@@ -22,14 +22,14 @@ interface VersionApi: ApiInterface<ApiResponse<Version>>, Callback<ApiResponse<V
         val LOG = Logger.getLogger(VersionApi::class.java.name)
     }
 
-    fun onBinding(version: Version, message: String?, status: Int?)
-
-    fun onFailureBinding(message: String, status: Int)
-
     interface Endpoint {
         @GET("/api/v1/AppVersion/GetLatestVersion")
         fun getLastVersion(@Query("app_type") appType: Int, @Query("device_type") deviceType: Int): Call<ApiResponse<Version>>
     }
+
+    fun onBinding(version: Version, message: String?, status: Int?)
+
+    fun onFailureBinding(message: String, status: Int)
 
     fun getLastVersion(appType: Int, deviceType: Int): Call<ApiResponse<Version>> {
         val call: Call<ApiResponse<Version>>  = initEndPoint().create(Endpoint::class.java).getLastVersion(appType, deviceType)

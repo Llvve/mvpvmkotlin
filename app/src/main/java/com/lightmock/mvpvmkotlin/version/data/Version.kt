@@ -1,6 +1,7 @@
 package com.lightmock.mvpvmkotlin.version.data
 
 import android.databinding.BaseObservable
+import java.io.Serializable
 
 /**
  * Created by Llvve on 16/11/2017 AD.
@@ -24,4 +25,4 @@ import android.databinding.BaseObservable
 data class Version(val app_name: String, val device_name: String, val status_name: String, val id: Int, val app_type: Int,
                    val device_type: Int, val version: String, val is_force_update: Boolean,
                    val create_date: String, val update_date: String, val status: Int, val appType: Int,
-                   val deviceType: Int, val versionStatus: String) : BaseObservable()
+                   val deviceType: Int, val versionStatus: String) : BaseObservable(), Serializable
