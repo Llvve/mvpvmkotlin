@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".teltype.TelTypeActivity"/>
+        <activity android:name=".teltype.view.TelTypeActivity"/>
 
     </application>
 

@@ -12,7 +12,7 @@ import android.widget.Toast
 import com.lightmock.core.binder.toast
 import com.lightmock.mvpvmkotlin.R
 import com.lightmock.mvpvmkotlin.databinding.FragmentVersionBinding
-import com.lightmock.mvpvmkotlin.teltype.TelTypeActivity
+import com.lightmock.mvpvmkotlin.teltype.view.TelTypeActivity
 import com.lightmock.mvpvmkotlin.version.itf.IVersion
 import com.lightmock.mvpvmkotlin.version.presenter.VersionPresenter
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel

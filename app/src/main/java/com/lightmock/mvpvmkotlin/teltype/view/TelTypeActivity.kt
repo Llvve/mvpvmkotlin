@@ -1,4 +1,4 @@
-package com.lightmock.mvpvmkotlin.teltype
+package com.lightmock.mvpvmkotlin.teltype.view
 
 import android.content.Context
 import android.content.Intent
