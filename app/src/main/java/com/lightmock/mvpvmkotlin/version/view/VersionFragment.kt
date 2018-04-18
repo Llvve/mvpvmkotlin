@@ -42,6 +42,7 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
      * Subscribes to the VersionViewModel data.
      */
     private fun subscribeToViewModel() {
+        // lateinit viewmodel variable
         viewModel = ViewModelProviders.of(this).get(VersionViewModel::class.java)
 
         presenter = VersionPresenter(this, viewModel)
@@ -60,6 +61,7 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        // lateinit binding variable
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_version, container, false)
         return binding.root
     }
@@ -70,12 +72,12 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
         /**
          * Initiate api connection and action listener
          */
+        presenter.onViewInit()
+
         btn_reload.setOnClickListener(this)
         btn_goto_teltype.setOnClickListener(this)
         rad_device_android.setOnClickListener(this)
         rad_device_ios.setOnClickListener(this)
-
-        presenter.onViewInit()
     }
 
     override fun updateProgress(progress: String) {
