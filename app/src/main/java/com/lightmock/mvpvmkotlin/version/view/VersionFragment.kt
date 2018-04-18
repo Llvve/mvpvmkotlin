@@ -13,6 +13,7 @@ import com.lightmock.core.binder.toast
 import com.lightmock.mvpvmkotlin.R
 import com.lightmock.mvpvmkotlin.databinding.FragmentVersionBinding
 import com.lightmock.mvpvmkotlin.teltype.view.TelTypeActivity
+import com.lightmock.mvpvmkotlin.version.data.Version
 import com.lightmock.mvpvmkotlin.version.itf.IVersion
 import com.lightmock.mvpvmkotlin.version.presenter.VersionPresenter
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel
@@ -23,14 +24,15 @@ import kotlinx.android.synthetic.main.fragment_version.*
  */
 class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
 
+    /**
+     * Example show 2 types how to handle data from databinding, viewmodel
+     */
     private lateinit var binding: FragmentVersionBinding
     private lateinit var viewModel: VersionViewModel
     private lateinit var presenter: VersionPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProviders.of(this).get(VersionViewModel::class.java)
 
         // Observe the viewmodel
         subscribeToViewModel()
@@ -40,10 +42,11 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
      * Subscribes to the VersionViewModel data.
      */
     private fun subscribeToViewModel() {
-        // React to data changes on the version property
+        viewModel = ViewModelProviders.of(this).get(VersionViewModel::class.java)
 
         presenter = VersionPresenter(this, viewModel)
 
+        // React to data changes on the version property
         viewModel.getVersion().observe(this, Observer { version ->
             /**
              * Handle observe version data
@@ -88,7 +91,11 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
                 presenter.onReload()
             }
             btn_goto_teltype.id -> {
-                startActivity(TelTypeActivity.newIntent(context!!, binding.data!!))
+                if (viewModel.getVersion().value == null) {
+                    return
+                }
+                startActivity(TelTypeActivity.newIntent(context!!, viewModel.getVersion().value!!))
+//                startActivity(TelTypeActivity.newIntent(context!!, binding.data!!))
             }
             rad_device_android.id -> {
                 presenter.onDeviceSwitched(VersionViewModel.AppType.HANDIGO.value, VersionViewModel.Device.ANDROID.value)
@@ -106,10 +113,20 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
      * Emits when viewmodel bind already
      */
     override fun onBind(viewModel: VersionViewModel) {
-        binding!!.viewModel = viewModel
+        binding.viewModel = viewModel
     }
 
     override fun onFailureBinding(message: String, status: Int) {
+        /**
+         * reset data class by using viewmodel observer and databinding
+         */
+        viewModel.setVersion(Version("", "", "", 0, 0,
+        0, "", false,
+        "","", 0, 0,
+        0, ""))
+
+        binding.viewModel = null
+        binding.data = null
         message.toast(context, Toast.LENGTH_LONG)
     }
 }

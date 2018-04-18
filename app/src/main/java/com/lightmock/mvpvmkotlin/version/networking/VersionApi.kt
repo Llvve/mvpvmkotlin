@@ -16,7 +16,7 @@ import java.util.logging.Logger
 /**
  * This view connects the view implementation with a presenter.
  */
-interface VersionApi: ApiInterface<ApiResponse<Version>>, Callback<ApiResponse<Version>> {
+interface VersionApi: ApiInterface, Callback<ApiResponse<Version>> {
 
     companion object {
         val LOG = Logger.getLogger(VersionApi::class.java.name)
@@ -29,7 +29,7 @@ interface VersionApi: ApiInterface<ApiResponse<Version>>, Callback<ApiResponse<V
 
     fun onBinding(version: Version, message: String?, status: Int?)
 
-    fun onFailureBinding(message: String, status: Int)
+    fun onFailureBinding(message: String?, status: Int?)
 
     fun getLastVersion(appType: Int, deviceType: Int): Call<ApiResponse<Version>> {
         val call: Call<ApiResponse<Version>>  = initEndPoint().create(Endpoint::class.java).getLastVersion(appType, deviceType)
@@ -44,7 +44,7 @@ interface VersionApi: ApiInterface<ApiResponse<Version>>, Callback<ApiResponse<V
             val resp = (response.body() as ApiResponse<Version>)
 
             if (resp.Status != 200) {
-                onFailureBinding(resp.Message!!, resp.Status)
+                onFailureBinding(resp.Message, resp.Status)
                 return
             }
 
@@ -52,7 +52,7 @@ interface VersionApi: ApiInterface<ApiResponse<Version>>, Callback<ApiResponse<V
                 onBinding(resp.data, resp.Message, resp.Status)
             }
             catch (e : Exception) {
-                onFailureBinding(e.message!!, 500)
+                onFailureBinding(e.message, 500)
                 e.printStackTrace()
             }
 
@@ -64,7 +64,7 @@ interface VersionApi: ApiInterface<ApiResponse<Version>>, Callback<ApiResponse<V
 
     override fun onFailure(call: Call<ApiResponse<Version>>?, t: Throwable?) {
         LOG.warning(t!!.message)
-        onFailureBinding(t.message!!, 500)
+        onFailureBinding(t.message, 500)
         t.printStackTrace()
     }
 }

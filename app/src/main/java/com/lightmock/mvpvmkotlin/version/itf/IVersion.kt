@@ -11,9 +11,14 @@ interface IVersion {
         fun updateProgress(progress: String)
 
         /**
-         * Provides handle bind case
+         * Provides handle bind with VersionViewModel case
          */
         fun onBind(viewModel: VersionViewModel)
+
+//        /**
+//         * Provides handle bind with data binding case
+//         */
+//        fun onBind()
 
         /**
          * Provides handle failure binding case

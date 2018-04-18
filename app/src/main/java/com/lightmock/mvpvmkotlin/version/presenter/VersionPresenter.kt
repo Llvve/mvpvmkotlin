@@ -26,15 +26,15 @@ class VersionPresenter(iView: IVersion.IView, viewModel: VersionViewModel): Vers
 
     override fun onBinding(version: Version, message: String?, status: Int?) {
         versionCache.add(version)
-        iView.updateProgress("Complete retrieve last version")
+        iView.updateProgress("Complete retrieve version")
         viewModel.setVersion(version)
 
         iView.onBind(viewModel)
     }
 
-    override fun onFailureBinding(message: String, status: Int) {
-        iView.updateProgress(message)
-        iView.onFailureBinding(message, status)
+    override fun onFailureBinding(message: String?, status: Int?) {
+        iView.updateProgress(message!!)
+        iView.onFailureBinding(message, status!!)
     }
 
     override fun onViewInit() {

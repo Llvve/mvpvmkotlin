@@ -8,11 +8,10 @@ import retrofit2.converter.gson.GsonConverterFactory
  * Created by Llvve on 16/11/2017 AD.
  */
 
-interface ApiInterface<T> {
+interface ApiInterface {
 
     val BASE_URL: String
         get() = "http://apidev.handigo.run"
-
 
     fun initEndPoint(): Retrofit {
         return Retrofit.Builder()
