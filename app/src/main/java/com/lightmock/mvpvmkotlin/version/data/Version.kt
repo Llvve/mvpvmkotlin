@@ -25,4 +25,12 @@ import java.io.Serializable
 data class Version(val app_name: String, val device_name: String, val status_name: String, val id: Int, val app_type: Int,
                    val device_type: Int, val version: String, val is_force_update: Boolean,
                    val create_date: String, val update_date: String, val status: Int, val appType: Int,
-                   val deviceType: Int, val versionStatus: String) : BaseObservable(), Serializable
+                   val deviceType: Int, val versionStatus: String) : BaseObservable(), Serializable {
+
+    constructor() : this("", "", "", 0, 0,
+            0, "", false,
+            "","", 0, 0,
+            0, ""
+    )
+
+}
