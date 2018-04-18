@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.lightmock.core.binder.toast
+import com.lightmock.core.compressor.toast
 import com.lightmock.mvpvmkotlin.R
 import com.lightmock.mvpvmkotlin.databinding.FragmentVersionBinding
 import com.lightmock.mvpvmkotlin.teltype.view.TelTypeActivity

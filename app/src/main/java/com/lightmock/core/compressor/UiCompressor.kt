@@ -1,4 +1,4 @@
-package com.lightmock.core.binder
+package com.lightmock.core.compressor
 
 import android.content.Context
 import android.widget.Toast
