@@ -91,9 +91,6 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
                 presenter.onReload()
             }
             btn_goto_teltype.id -> {
-                if (viewModel.getVersion().value == null) {
-                    return
-                }
                 startActivity(TelTypeActivity.newIntent(context!!, viewModel.getVersion().value!!))
 //                startActivity(TelTypeActivity.newIntent(context!!, binding.data!!))
             }
