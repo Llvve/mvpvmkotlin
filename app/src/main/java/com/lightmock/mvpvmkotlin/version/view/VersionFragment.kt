@@ -118,9 +118,9 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
          * reset data class by using viewmodel observer and databinding
          */
         viewModel.setVersion(Version())
-
-        binding.viewModel = null
-        binding.data = null
+        binding.viewModel = VersionViewModel()
+        binding.viewModel!!.setVersion(Version())
+        binding.data = Version()
         message.toast(context, Toast.LENGTH_LONG)
     }
 }
