@@ -2,17 +2,18 @@ package com.lightmock.mvpvmkotlin.version.presentation
 
 import com.lightmock.mvpvmkotlin.version.data.Version
 import com.lightmock.mvpvmkotlin.version.itf.IVersion
-import com.lightmock.mvpvmkotlin.version.networking.VersionApi
+import com.lightmock.mvpvmkotlin.version.repository.VersionApiRepos
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel
 import kotlin.properties.Delegates
 
 /**
  * Created by Llvve on 16/11/2017 AD.
  */
-class VersionPresenter(iView: IVersion.IView, viewModel: VersionViewModel): VersionApi, IVersion.IPresenter {
+class VersionPresenter(iView: IVersion.IView, viewModel: VersionViewModel): IVersion.IPresenter {
 
     private var iView: IVersion.IView by Delegates.notNull()
     private var viewModel: VersionViewModel by Delegates.notNull()
+    private var versionApiRepos: VersionApiRepos = VersionApiRepos(this)
 
     /**
      * Internal presenter cache to store version data
@@ -39,12 +40,12 @@ class VersionPresenter(iView: IVersion.IView, viewModel: VersionViewModel): Vers
 
     override fun onViewInit() {
         iView.updateProgress("Retrieving last version")
-        getLastVersion(viewModel.getAppType(), viewModel.getDeviceType())
+        versionApiRepos.getLastVersion(viewModel.getAppType(), viewModel.getDeviceType())
     }
 
     override fun onReload() {
         iView.updateProgress("Reload last version")
-        getLastVersion(viewModel.getAppType(), viewModel.getDeviceType())
+        versionApiRepos.getLastVersion(viewModel.getAppType(), viewModel.getDeviceType())
     }
 
     override fun onDeviceSwitched(appType: Int, deviceType: Int) {

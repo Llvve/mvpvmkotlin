@@ -1,70 +1,29 @@
 package com.lightmock.mvpvmkotlin.version.networking
 
-import com.lightmock.core.networking.ApiInterface
 import com.lightmock.core.networking.ApiResponse
 import com.lightmock.mvpvmkotlin.version.data.Version
 import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.util.logging.Logger
 
 /**
  * Created by Llvve on 16/11/2017 AD.
  */
 /**
- * This view connects the view implementation with a presenter.
+ * Service is based on API Interface
  */
-interface VersionApi: ApiInterface, Callback<ApiResponse<Version>> {
+interface VersionApi {
 
-    companion object {
-        val LOG = Logger.getLogger(VersionApi::class.java.name)
-    }
+    /**
+     * Request Last version here
+     */
+    @GET("/api/v1/AppVersion/GetLatestVersion")
+    fun getLastVersion(@Query("app_type") appType: Int, @Query("device_type") deviceType: Int): Call<ApiResponse<Version>>
 
-    interface Endpoint {
-        @GET("/api/v1/AppVersion/GetLatestVersion")
-        fun getLastVersion(@Query("app_type") appType: Int, @Query("device_type") deviceType: Int): Call<ApiResponse<Version>>
-    }
+    /**
+     * Mock request Last version here
+     */
+    @GET("/api/v1/AppVersion/GetLatestVersion")
+    fun getLastVersionRaw(@Query("app_type") appType: Int, @Query("device_type") deviceType: Int): Call<VersionResponse>
 
-    fun onBinding(version: Version, message: String?, status: Int?)
-
-    fun onFailureBinding(message: String?, status: Int?)
-
-    fun getLastVersion(appType: Int, deviceType: Int): Call<ApiResponse<Version>> {
-        val call: Call<ApiResponse<Version>>  = initEndPoint().create(Endpoint::class.java).getLastVersion(appType, deviceType)
-        call.enqueue(this)
-
-        return call
-    }
-
-    override fun onResponse(call: Call<ApiResponse<Version>>?, response: Response<ApiResponse<Version>>?) {
-        if (response!!.isSuccessful && response.body() != null && response.code() == 200) {
-
-            val resp = (response.body() as ApiResponse<Version>)
-
-            if (resp.Status != 200) {
-                onFailureBinding(resp.Message, resp.Status)
-                return
-            }
-
-            try {
-                onBinding(resp.data, resp.Message, resp.Status)
-            }
-            catch (e : Exception) {
-                onFailureBinding(e.message, 500)
-                e.printStackTrace()
-            }
-
-            return
-        }
-
-        onFailureBinding(response.message(), response.code())
-    }
-
-    override fun onFailure(call: Call<ApiResponse<Version>>?, t: Throwable?) {
-        LOG.warning(t!!.message)
-        onFailureBinding(t.message, 500)
-        t.printStackTrace()
-    }
 }

@@ -1,5 +1,6 @@
 package com.lightmock.mvpvmkotlin.version.itf
 
+import com.lightmock.mvpvmkotlin.version.data.Version
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel
 
 interface IVersion {
@@ -27,6 +28,10 @@ interface IVersion {
     }
 
     interface IPresenter {
+        fun onBinding(version: Version, message: String?, status: Int?)
+
+        fun onFailureBinding(message: String?, status: Int?)
+
         /**
          * Provides initiate of view
          */

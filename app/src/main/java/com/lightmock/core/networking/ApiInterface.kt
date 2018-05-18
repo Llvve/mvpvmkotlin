@@ -10,8 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 interface ApiInterface {
 
-    val BASE_URL: String
-        get() = "http://apidev.handigo.run"
+    val BASE_URL: String get() = "http://apidev.handigo.run"
 
     fun initEndPoint(): Retrofit {
         return Retrofit.Builder()
