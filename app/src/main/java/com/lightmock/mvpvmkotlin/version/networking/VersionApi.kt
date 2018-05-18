@@ -1,7 +1,7 @@
 package com.lightmock.mvpvmkotlin.version.networking
 
-import com.lightmock.core.ApiInterface
-import com.lightmock.core.data.ApiResponse
+import com.lightmock.core.networking.ApiInterface
+import com.lightmock.core.networking.ApiResponse
 import com.lightmock.mvpvmkotlin.version.data.Version
 import retrofit2.Call
 import retrofit2.Callback

@@ -1,4 +1,4 @@
-package com.lightmock.core
+package com.lightmock.core.networking
 
 import com.lightmock.core.converter.ToStringConverterFactory
 import retrofit2.Retrofit
