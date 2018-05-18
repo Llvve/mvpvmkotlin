@@ -15,7 +15,7 @@ import com.lightmock.mvpvmkotlin.databinding.FragmentVersionBinding
 import com.lightmock.mvpvmkotlin.teltype.view.TelTypeActivity
 import com.lightmock.mvpvmkotlin.version.data.Version
 import com.lightmock.mvpvmkotlin.version.itf.IVersion
-import com.lightmock.mvpvmkotlin.version.presenter.VersionPresenter
+import com.lightmock.mvpvmkotlin.version.presentation.VersionPresenter
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel
 import kotlinx.android.synthetic.main.fragment_version.*
 
