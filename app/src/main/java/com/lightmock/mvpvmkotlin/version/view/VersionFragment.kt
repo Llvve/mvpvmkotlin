@@ -123,6 +123,7 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
         binding.viewModel = VersionViewModel()
         binding.viewModel!!.setVersion(Version())
         binding.data = Version()
+
         message.toast(context, Toast.LENGTH_LONG)
     }
 }

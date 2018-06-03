@@ -28,8 +28,14 @@ interface IVersion {
     }
 
     interface IPresenter {
+        /**
+         * Provides ejection from view to presenter
+         */
         fun onBinding(version: Version, message: String?, status: Int?)
 
+        /**
+         * Provides ejection from repo to presenter
+         */
         fun onFailureBinding(message: String?, status: Int?)
 
         /**

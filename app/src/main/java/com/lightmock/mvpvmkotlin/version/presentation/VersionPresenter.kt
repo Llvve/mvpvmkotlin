@@ -27,6 +27,7 @@ class VersionPresenter(iView: IVersion.IView, viewModel: VersionViewModel): IVer
 
     override fun onBinding(version: Version, message: String?, status: Int?) {
         versionCache.add(version)
+
         iView.updateProgress("Complete retrieve version")
         viewModel.setVersion(version)
 
