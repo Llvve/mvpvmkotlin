@@ -9,20 +9,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.lightmock.core.compressor.toast
 import com.lightmock.mvpvmkotlin.R
 import com.lightmock.mvpvmkotlin.databinding.FragmentVersionBinding
 import com.lightmock.mvpvmkotlin.teltype.view.TelTypeActivity
 import com.lightmock.mvpvmkotlin.version.data.Version
+import com.lightmock.mvpvmkotlin.version.injection.ContextModule
+import com.lightmock.mvpvmkotlin.version.injection.ImageLoaderModule
 import com.lightmock.mvpvmkotlin.version.itf.IVersion
 import com.lightmock.mvpvmkotlin.version.presentation.VersionPresenter
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel
+import dagger.Component
 import kotlinx.android.synthetic.main.fragment_version.*
 
 /**
  * Created by Llvve on 16/11/2017 AD.
  */
 class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
+
+    @Component(modules = arrayOf(ImageLoaderModule::class))
+    interface VersionComponent {
+        fun glideGet(): Glide
+        fun glideWith(): RequestManager
+    }
 
     /**
      * Example show 2 types how to handle data from databinding, viewmodel
@@ -31,8 +42,20 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
     private lateinit var viewModel: VersionViewModel
     private lateinit var presenter: VersionPresenter
 
+    private lateinit var component: VersionComponent
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        /**
+         * Initiate component
+         */
+        component = DaggerVersionFragment_VersionComponent
+                .builder()
+                .contextModule(ContextModule(activity!!))
+//                .imageLoaderModule(GlideModule("http://goo.gl/gEgYUd"))
+                .build()
 
         // Observe the viewmodel
         subscribeToViewModel()
@@ -73,6 +96,9 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
          * Initiate api connection and action listener
          */
         presenter.onViewInit()
+
+//        component.load().into(iv_tmp)
+        component.glideWith().load("http://goo.gl/gEgYUd").into(iv_tmp)
 
         btn_reload.setOnClickListener(this)
         btn_goto_teltype.setOnClickListener(this)
