@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import com.lightmock.core.compressor.toast
+import com.lightmock.core.extension.toast
 import com.lightmock.mvpvmkotlin.R
 import com.lightmock.mvpvmkotlin.databinding.FragmentVersionBinding
 import com.lightmock.mvpvmkotlin.teltype.view.TelTypeActivity
@@ -22,7 +22,6 @@ import com.lightmock.mvpvmkotlin.version.itf.IVersion
 import com.lightmock.mvpvmkotlin.version.presentation.VersionPresenter
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel
 import dagger.Component
-import kotlinx.android.synthetic.main.fragment_version.*
 
 /**
  * Created by Llvve on 16/11/2017 AD.
