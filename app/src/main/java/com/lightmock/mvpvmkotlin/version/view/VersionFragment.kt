@@ -22,6 +22,7 @@ import com.lightmock.mvpvmkotlin.version.itf.IVersion
 import com.lightmock.mvpvmkotlin.version.presentation.VersionPresenter
 import com.lightmock.mvpvmkotlin.version.viewmodel.VersionViewModel
 import dagger.Component
+import kotlinx.android.synthetic.main.fragment_version.*
 
 /**
  * Created by Llvve on 16/11/2017 AD.
