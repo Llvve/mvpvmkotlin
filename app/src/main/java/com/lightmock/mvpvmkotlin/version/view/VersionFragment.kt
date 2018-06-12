@@ -3,20 +3,25 @@ package com.lightmock.mvpvmkotlin.version.view
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.request.target.ViewTarget
 import com.lightmock.core.extension.toast
 import com.lightmock.mvpvmkotlin.R
 import com.lightmock.mvpvmkotlin.databinding.FragmentVersionBinding
 import com.lightmock.mvpvmkotlin.teltype.view.TelTypeActivity
 import com.lightmock.mvpvmkotlin.version.data.Version
 import com.lightmock.mvpvmkotlin.version.injection.ContextModule
+import com.lightmock.mvpvmkotlin.version.injection.ImageComponent
 import com.lightmock.mvpvmkotlin.version.injection.ImageLoaderModule
 import com.lightmock.mvpvmkotlin.version.itf.IVersion
 import com.lightmock.mvpvmkotlin.version.presentation.VersionPresenter
@@ -33,6 +38,9 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
     interface VersionComponent {
         fun glideGet(): Glide
         fun glideWith(): RequestManager
+        fun load(): RequestBuilder<Drawable>
+        fun loadInto(): ViewTarget<ImageView, Drawable>
+        fun imageComponent(): ImageComponent
     }
 
     /**
@@ -43,7 +51,6 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
     private lateinit var presenter: VersionPresenter
 
     private lateinit var component: VersionComponent
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,8 +104,11 @@ class VersionFragment: Fragment(), IVersion.IView, View.OnClickListener {
          */
         presenter.onViewInit()
 
-//        component.load().into(iv_tmp)
         component.glideWith().load("http://goo.gl/gEgYUd").into(iv_tmp)
+        component.imageComponent().url = "http://goo.gl/gEgYUd"
+        component.imageComponent().view = iv_tmp
+        component.load().into(iv_tmp)
+        component.loadInto()
 
         btn_reload.setOnClickListener(this)
         btn_goto_teltype.setOnClickListener(this)
