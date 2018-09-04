@@ -65,13 +65,6 @@ class VersionViewModel: ViewModel() {
     }
 
     /**
-     * Set the Version list contents
-     */
-    fun setAppType(versionLiveData: Version) {
-        this.versionLiveData.value = versionLiveData
-    }
-
-    /**
      * Set the Version content
      */
     fun setVersion(versionLiveData: Version) {
